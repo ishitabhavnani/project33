@@ -78,26 +78,58 @@ function draw() {
      plinkos[i].display();
      
    }
-   if(frameCount%60===0){
-     //particles.push(new Particle(random(width/2-30, width/2+30), 10,10));
-     mousePressed();
-   }
- 
-  /*for (var j = 0; j < particles.length; j++) {
    
-     particles[j].display();
-   }*/
+  
    for (var k = 0; k < divisions.length; k++) {
      
      divisions[k].display();
+   }
+ 
+   if (particle!= null){
+      particle.display(); 
+       if (particle.body.position.y>780){
+           if (particle.body.position.x<220 && particle.body.position.x>0 ){
+             score=score+500;
+             particle=null;
+           }
+           else if (particle.body.position.x>221 && particle.body.position.x<300 ){
+            score=score+200;
+            particle=null;
+           }
+           else if (particle.body.position.x>301 && particle.body.position.x<460 ){
+            score=score+100;
+            particle=null;
+          }
+          else if (particle.body.position.x>461 && particle.body.position.x<540 ){
+            score=score+200;
+            particle=null;
+          }
+          else if (particle.body.position.x>541 && particle.body.position.x<800 ){
+            score=score+500;
+            particle=null;
+          }
+       }  
+      
+   }
+
+   if (count>=5){
+     gameState="end";
+   }
+
+   if (gameState==="end"){
+     textSize(50);
+     fill("red")
+     text("GAME OVER" , 250,450);
    }
    
 }
 
 function mousePressed(){
-  console.log("hi")
-  if (gameState!=="end"){
+  
+  if (gameState==="play"){
     count++;
     particle=new Particle(mouseX,10,10,10);
+    //console.log("hi")
   }
 }
+
